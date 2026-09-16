@@ -36,7 +36,7 @@ const engineeringPillars = [
 ];
 const particles = Array.from({ length: 46 }, (_, index) => ({ id: index, x: (index * 37 + 11) % 100, y: (index * 61 + 7) % 100, size: index % 9 === 0 ? 5 : index % 4 === 0 ? 3 : 2, delay: (index % 8) * .55, duration: 7 + (index % 7) * 1.25 }));
 
-function EngineeringShowcase(){ const [active,setActive]=useState(0); const pillar=engineeringPillars[active]; return <section className="engineering-showcase" aria-labelledby="engineering-showcase-title"><Label>ENGINEERING FOCUS</Label><h2 id="engineering-showcase-title">BACKEND · AI · SYSTEMS · DEVOPS</h2><p className="showcase-lead">Five engineering pillars, ordered by depth. Each is backed by production work, not coursework. <strong>I believe the more hands-on we are, the more we learn and grow as engineers.</strong></p><div className="showcase-tabs" role="tablist" aria-label="Engineering pillars">{engineeringPillars.map((item,index)=><button key={item.id} role="tab" aria-selected={active===index} className={active===index?'active':''} onClick={()=>setActive(index)}><small>{item.number}</small>{item.label}</button>)}</div><AnimatePresence mode="wait"><motion.div key={pillar.id} className="showcase-panel" role="tabpanel" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}} transition={{duration:.2}}><div className="showcase-panel-head"><span>{pillar.number} / 05</span><h3>{pillar.title}</h3><p>{pillar.intro}</p></div><div className="showcase-cards">{pillar.highlights.map(([company,role,detail])=><article key={company}><h4>{company}</h4><b>{role}</b><p>{detail}</p></article>)}</div><div className="showcase-skills">{pillar.skills.map((skill,index)=><span key={`${skill}-${index}`}>{skill}</span>)}</div></motion.div></AnimatePresence></section>}
+function EngineeringShowcase(){ const [active,setActive]=useState(0); const pillar=engineeringPillars[active]; return <section id="systems" className="engineering-showcase" aria-labelledby="engineering-showcase-title"><Label>ENGINEERING FOCUS</Label><h2 id="engineering-showcase-title">BACKEND · AI · SYSTEMS · DEVOPS</h2><p className="showcase-lead">Five engineering pillars, ordered by depth. Each is backed by production work, not coursework. <strong>I believe the more hands-on we are, the more we learn and grow as engineers.</strong></p><div className="showcase-tabs" role="tablist" aria-label="Engineering pillars">{engineeringPillars.map((item,index)=><button key={item.id} role="tab" aria-selected={active===index} className={active===index?'active':''} onClick={()=>setActive(index)}><small>{item.number}</small>{item.label}</button>)}</div><AnimatePresence mode="wait"><motion.div key={pillar.id} className="showcase-panel" role="tabpanel" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-8}} transition={{duration:.2}}><div className="showcase-panel-head"><span>{pillar.number} / 05</span><h3>{pillar.title}</h3><p>{pillar.intro}</p></div><div className="showcase-cards">{pillar.highlights.map(([company,role,detail])=><article key={company}><h4>{company}</h4><b>{role}</b><p>{detail}</p></article>)}</div><div className="showcase-skills">{pillar.skills.map((skill,index)=><span key={`${skill}-${index}`}>{skill}</span>)}</div></motion.div></AnimatePresence></section>}
 
 function jump(id:string) { document.getElementById(id==='contact me'?'contact':id)?.scrollIntoView({behavior:'smooth'}); }
 function useMounted(){ const [mounted,setMounted]=useState(false); useEffect(()=>setMounted(true),[]); return mounted; }
@@ -94,9 +94,8 @@ export default function Page(){ const [menu,setMenu]=useState(false),[palette,se
       bullets={[
         'Architected an LLM-powered agentic test-automation platform combining RAG, MCP, AST-based code analysis, code-diff analysis, and automated test generation.',
         'Scaled the platform to 500+ engineers, reducing test-authoring effort by ~60% and test setup time by ~81%.',
-        'Engineered asynchronous and parallel execution pipelines with controlled batching, retries, exponential backoff, and failure isolation for reliable large-scale processing.',
-        'Re-architected processing for 160+ files, reducing execution time from ~20 minutes to 7–8 minutes and delivering ~60–65% lower latency with ~2.5× throughput.',
-        'Built secure RBAC-enabled APIs with JWT authentication and optimised backend execution paths, improving API performance by ~40%.',
+        'Engineered fault-tolerant, distributed workflows for automated test validation using asynchronous and parallel execution, controlled batching, retries, and exponential backoff; reduced processing time for 160+ files from 20 minutes to 7–8 minutes, achieving 60–65% lower latency and 2.5× higher throughput while ensuring reliability.',
+        'Architected the VXT platform backend for CMS services using Spring Boot, Redis, PostgreSQL, Docker, and Kubernetes; optimized data access and caching strategies to improve API performance by 40%.',
         'Worked across containerised and distributed workloads using Docker and Kubernetes, with emphasis on reliability, scalability, observability, and deployment.'
       ]}
     />
@@ -130,7 +129,7 @@ export default function Page(){ const [menu,setMenu]=useState(false),[palette,se
     <Experience
       num="03"
       company="WHAT THE FOOD"
-      role="Product Engineer"
+      role="Software Developer Intern"
       date="NOV 2024 → FEB 2025"
       location="IIT-BHU INCUBATED STARTUP"
       liveLink="https://www.whatthefood.in/"
@@ -155,6 +154,7 @@ export default function Page(){ const [menu,setMenu]=useState(false),[palette,se
 
   </div>
 </section>
+<EngineeringShowcase/>
 <section id="stack" className="stack"><Label>STACK</Label><Reveal><h2>THE TECH I<br/><em>WORK WITH.</em></h2></Reveal><div className="stack-list">{stacks.map(([n,title,items])=><Reveal key={title}><article><span>{n}</span><h3>{title}</h3><p>{items}</p><ArrowUpRight size={18}/></article></Reveal>)}</div></section>
 <section id="projects" className="projects"><Label>PROJECTS</Label><Reveal><h2>MY <em>PROJECTS.</em></h2><p className="projects-lead">Hands-on work across AI systems, backend services, and mobile product engineering.</p></Reveal><div className="strong-project-grid">{featuredProjects.map((project,index)=><StrongProject key={project.name} project={project} index={index}/>)}</div></section>
 <section className="education"><Label>EDUCATION</Label><Reveal><h2>JC Bose University of Science and Technology, YMCA</h2><article><h3>B.Tech, Computer Science and Engineering</h3><span>2022 — 2026 · CGPA 8.85</span><b>RELEVANT COURSEWORK</b><div>{['Object-Oriented Programming','Data Structures','Algorithms','Operating Systems','Software Engineering','Database Management Systems','Computer Networks'].map(course=><i key={course}>{course}</i>)}</div></article></Reveal></section>
